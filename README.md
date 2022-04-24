@@ -55,18 +55,20 @@ Force commands are used to develop on the Salesforce Platform and most of the ti
 * Manage Data
 * etc
 
+### Create Project - The very first setp is to create the Salesforce DX project in the form of Salesforce DX format. Here are the various commands that can be used to create the project.
 ````
-1. Create Project
 	sfdx force:project:create --projectname mywork
 	sfdx force:project:create --projectname mywork --defaultpackagedir myapp
 	sfdx force:project:create --projectname mywork --defaultpackagedir myapp --manifest
 	sfdx force:project:create --projectname mywork --template empty
 ````
 
-````
---------------------- SFDX Force User Commands ----------------------------------
+### SFDX Force User Commands 
+The Salesforce DX command is used to manage the users inside any Scratch or NoN Scratch ORGs.
 
 1. Create User
+
+````
 	sfdx force:user:create
 
 	sfdx force:user:create -a testuser1 -f config/project-user-def.json profileName='Chatter Free User'
@@ -74,11 +76,15 @@ Force commands are used to develop on the Salesforce Platform and most of the ti
 	sfdx force:user:create username=testuser1@my.org email=me@my.org permsets=DreamHouse
 
 	sfdx force:user:create -f config/project-user-def.json email=me@my.org generatepassword=true
-	
-2. List all users
-	sfdx force:user:list
+````
+2. List all users	
+````
+sfdx force:user:list
+````
 	
 3. Generate Password
+
+````
 	sfdx force:user:password:generate
 
 	sfdx force:user:password:generate -l 12
@@ -89,7 +95,11 @@ Force commands are used to develop on the Salesforce Platform and most of the ti
 
 	sfdx force:user:password:generate -o "user1@my.org,user2@my.org,user3@my.org"
 	
+````
+	
 4. Assign permission set
+
+````
 	sfdx force:user:permset:assign -n "DreamHouse, LargeDreamHouse"
 
 	sfdx force:user:permset:assign -n DreamHouse -u me@my.org
@@ -98,20 +108,18 @@ Force commands are used to develop on the Salesforce Platform and most of the ti
 	
 ````
 
-```` 
-------------------------- Force Apex Commands -----------------------------------
+## Force Apex Commands
 
+````
 1. Create Apex Class - sfdx force:apex:class:create -n MyClass
-2. Execure Apex Code - 
-
-sfdx force:apex:execute 
+2. Execure Apex Code - sfdx force:apex:execute 
 Start typing Apex code. Press the Enter key after each line, then press CTRL+D when finished.
 
 ````
 
-````
----------------------- Force Lightning Commands -------------------------------------
+# Force Lightning Commands
 
+````
 1. Create LWC - sfdx force:lightning:component:create -n mycomponent --type lwc
 2. Create LWC - sfdx force:lightning:component:create -n mycomponent --type lwc -d lwc
 
@@ -123,8 +131,9 @@ Start typing Apex code. Press the Enter key after each line, then press CTRL+D w
 
 ### Deploy/Retriee Commands
 
+### Force Source Commands
+
 ````
------------------------- Force Source Commands -----------------------------------------------
 
 Scratch Org
 	Push : sfdx force:source:push
@@ -134,11 +143,13 @@ NoN-Scratch Org ( NON-DX Projects )
 	sfdx force:source:deploy -p path/to/source
 	sfdx force:source:deploy -m ApexClass
 	sfdx force:source:deploy -m ApexClass:MyApexClass
-	
------------------------ MD API Deploy Commands -----------------------------------
+````
 
-NoN Scratch ORG ( DX Projects )
-	
+### MD API Deploy Commands 
+
+### NoN Scratch ORG ( DX Projects )
+
+```
 Deploy: sfdx force:mdapi:deploy -d force-app/main/default
 Status : sfdx force:mdapi:deploy:report
 
@@ -149,9 +160,9 @@ Retrieve : sfdx force:mdapi:retrieve
 ### Work with Data
 
 ````
---------------------- Data Commands ------------------------------------
 
--- SOQL - sfdx force:data:soql:query -q "SELECT Id, Name, Account.Name FROM Contact"
+#### SOQL
+sfdx force:data:soql:query -q "SELECT Id, Name, Account.Name FROM Contact"
 sfdx force:data:soql:query -q "SELECT Id, Name FROM Account WHERE ShippingState IN ('CA', 'NY')"
 
 GET Single RECORD : sfdx force:data:record:get -s Account -i 0014x000014O3SiAAK
@@ -164,13 +175,13 @@ IMPORT DATA : sfdx force:data:tree:import -p ./data/data-plan.json
 
 Auth Commands gives you the ability to authenticate salesforce using different mechanism. Like oAuth 2.0, JWT, etc.
 
-````	
---------------------- Auth Commands -------------------------------
+````
 
 1. Web Login : sfdx auth:web:login -r https://login.salesforce.com -a myorg -d -s
 2. JWT Commands : sfdx auth:jwt:grant -u me@acme.org -f <path to jwt key file> -i <OAuth client id> -r https://acme.my.salesforce.com
 
 sfdx auth:jwt:grant --clientid 3MVG9szVa2Rx_sqBb444p50Yj --jwtkeyfile ./keys/server.key --username amitsingh@utils.com.dev --instanceurl https://login.salesforce.com
+
 ````
 
 ## SFDX RESOURCES
