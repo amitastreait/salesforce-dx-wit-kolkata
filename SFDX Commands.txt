@@ -1,0 +1,149 @@
+SFDX Commands
+
+--------------------- Force Commands ------------------------------
+
+1. Create Project
+	sfdx force:project:create --projectname mywork
+	sfdx force:project:create --projectname mywork --defaultpackagedir myapp
+	sfdx force:project:create --projectname mywork --defaultpackagedir myapp --manifest
+	sfdx force:project:create --projectname mywork --template empty
+	
+--------------------- Auth Commands -------------------------------
+
+1. Web Login : sfdx auth:web:login -r https://login.salesforce.com -a myorg -d -s
+2. JWT Commands : sfdx auth:jwt:grant -u me@acme.org -f <path to jwt key file> -i <OAuth client id> -r https://acme.my.salesforce.com
+
+sfdx auth:jwt:grant --clientid 3MVG9szVa2Rx_sqBb444p50Yj --jwtkeyfile ./keys/server.key --username amitsingh@utils.com.dev --instanceurl https://login.salesforce.com
+
+--------------------- Force User Commands ----------------------------------
+
+1. Create User
+	sfdx force:user:create
+
+	sfdx force:user:create -a testuser1 -f config/project-user-def.json profileName='Chatter Free User'
+
+	sfdx force:user:create username=testuser1@my.org email=me@my.org permsets=DreamHouse
+
+	sfdx force:user:create -f config/project-user-def.json email=me@my.org generatepassword=true
+	
+2. List all users
+	sfdx force:user:list
+	
+3. Generate Password
+	sfdx force:user:password:generate
+
+	sfdx force:user:password:generate -l 12
+
+	sfdx force:user:password:generate -c 3
+
+	sfdx force:user:password:generate -u me@my.org --json
+
+	sfdx force:user:password:generate -o "user1@my.org,user2@my.org,user3@my.org"
+	
+4. Assign permission set
+	sfdx force:user:permset:assign -n "DreamHouse, LargeDreamHouse"
+
+	sfdx force:user:permset:assign -n DreamHouse -u me@my.org
+
+	sfdx force:user:permset:assign -n DreamHouse -o "user1@my.org,user2,user3"
+	
+------------------------- Force Apex Commands -----------------------------------
+
+1. Create Apex Class - sfdx force:apex:class:create -n MyClass
+2. Execure Apex Code - 
+
+sfdx force:apex:execute 
+Start typing Apex code. Press the Enter key after each line, then press CTRL+D when finished.
+
+---------------------- Force Lightning Commands -------------------------------------
+
+1. Create LWC - sfdx force:lightning:component:create -n mycomponent --type lwc
+2. Create LWC - sfdx force:lightning:component:create -n mycomponent --type lwc -d lwc
+
+3. Test Setup: sfdx force:lightning:lwc:test:setup
+4. Create test cases 
+	sfdx force:lightning:lwc:test:create -f force-app/main/default/lwc/rating/rating.js
+	
+------------------------ Force Source Commands -----------------------------------------------
+
+Scratch Org
+	Push : sfdx force:source:push
+	Pull : sfdx force:source:pull
+	
+NoN-Scratch Org ( NON-DX Projects )
+	sfdx force:source:deploy -p path/to/source
+	sfdx force:source:deploy -m ApexClass
+	sfdx force:source:deploy -m ApexClass:MyApexClass
+	
+----------------------- MD API Deploy Commands -----------------------------------
+
+NoN Scratch ORG ( DX Projects )
+	
+Deploy: sfdx force:mdapi:deploy -d force-app/main/default
+Status : sfdx force:mdapi:deploy:report
+
+Retrieve : sfdx force:mdapi:retrieve
+
+--------------------- Data Commands ------------------------------------
+
+-- SOQL - sfdx force:data:soql:query -q "SELECT Id, Name, Account.Name FROM Contact"
+sfdx force:data:soql:query -q "SELECT Id, Name FROM Account WHERE ShippingState IN ('CA', 'NY')"
+
+GET Single RECORD : sfdx force:data:record:get -s Account -i 0014x000014O3SiAAK
+
+IMPORT DATA : sfdx force:data:tree:import -p ./data/data-plan.json
+
+--------------------- ORG Commands ------------------------------------------
+
+Open -
+
+sfdx force:org:open
+sfdx force:org:open -u me@my.org
+sfdx force:org:open -b chrome (chrome, edge, firefox)
+
+Display All the ORGS
+
+sfdx force:org:list
+
+GET Single ORG Information 
+
+sfdx force:org:display
+
+------------------- LIMIT Commands ----------------------------
+Limits 
+
+sfdx force:limits:api:display -u username@org.com
+
+Record Limits
+
+sfdx force:limits:recordcounts:display -u utils -s Account,Contact
+
+----------------------------- PRACTICE PRACTICE PRACTICE -----------------------
+
+============================= LWC Local Development ===================================
+1. Installation of Nodejs software and disconnect from office network VPN (if connected).
+2. Install node gyp by running 
+      npm install -g node-gyp
+3. And then after that, you can run 
+     npm install --global --production windows-build-tools
+4. And finally tried the below command it worked after 2 3 times..
+     sfdx plugins:install @salesforce/lwc-dev-server
+
+
+============================= RESOURCES ============================================
+
+https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm
+
+
+================================== UNIFIED SALESFORCE CLI =================================
+https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference_unified.htm
+
+
+
+
+	
+	
+	
+
+	
+
